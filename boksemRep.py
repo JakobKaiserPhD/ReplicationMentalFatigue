@@ -82,9 +82,6 @@ screenX = mywin.size[0]
 screenY = mywin.size[1]
 frameDur = mywin.monitorFramePeriod
 #Load the  fixation cross picture
-# fixation = visual.TextBox2(win=mywin, text="*", color=(1,1,1),size=[0.1, 0.1], pos=[0,0],units="deg", alignment="center",font="Arial")
-
-# Load the picture
 fixation = visual.ImageStim(win=mywin, image="stimuli/fixation.png", size=[0.5, 0.5], pos=[0,0], units="deg")
 
 #symbols for cue arrows
