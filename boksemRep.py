@@ -27,7 +27,7 @@ def sendTrigger(trigger):
 
 
 #should trigger be sent? => set to False for testing without EEG system; make sure to set to True before starting data collection
-triggerEnabled = True
+triggerEnabled = False
 #which screen to use for the experiment
 screenNumber = 2
 
@@ -71,7 +71,7 @@ if practice:
     strAdd = 'PRACTICE'
 else:
     strAdd = 'MAIN'
-fileName = 'simonExp_' + strAdd + '_p' + str(pnum) + '_' + expInfo['dateStr']
+fileName = 'logdat\simonExp_' + strAdd + '_p' + str(pnum) + '_' + expInfo['dateStr']
 dataFile = open (fileName + '.csv', 'w')
 #defining header => make sure this matches order of actual data logged on each trial
 dataFile.write('pnum,age,gender,practice,phase,timerPhase,tnum,stimPos,stimType,congruent,firstResp,firstRT,postResp,postRT,frameRate,ITI,trigger,winszX,winszY\n')
@@ -140,10 +140,10 @@ instructions.append(visual.TextBox2(win=mywin, text=instrtxt2, color=(1,1,1),pos
 instructions.append(visual.TextBox2(win=mywin, text=instrtxt3, color=(1,1,1),pos=[0,0],units="deg",size=[22,None]))
 if practice:
     num_phases = 1
-    duration_phases = [0.05*60] # durations in seconds; practice phase in original experiment during EEG preparation consists of 15 min
+    duration_phases = [1*60] # durations in seconds; practice phase in original experiment during EEG preparation consists of 15 min
 else:
     num_phases = 2
-    duration_phases = [0.05*60, 0.01*60] # durations in seconds; original experiment consists of first phase=120 min and second phase=20 min
+    duration_phases = [1*60, 1*60] # durations in seconds; original experiment consists of first phase=120 min and second phase=20 min
 #determining timings of individual trial phases
 time_cue = 0.15
 time_action = 1.2
