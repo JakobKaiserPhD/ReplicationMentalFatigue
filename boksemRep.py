@@ -2,17 +2,50 @@
 from psychopy import visual, core,data,event,gui
 import math, random
 
+
+#This script is build on the description of the Simon task in the following paper: Mental fatigue, motivation and action monitoring" (Boksem et al., 2006)
+#PLEASE NOTE: 
+# - to run this script you need to have the stimuli folder in the same directory as this script
+# - make sure to adjust the screenNumber variable to your setup (0 for first screen, 1 for second screen, etc.)
+# - make sure to adjust the trigger sending function to your EEG system (contact Jakob Kaiser if you need help with this)
+# - make sure to adjust the duration of the experiment phases (=15 minutes for practice phase during EEG preparation, =2 hours for main experiment, =20 minutes for second phase of main experiment) => see variable duration_phases
+# - please test and proofread the script + the ensuing data files and let us know about anything that needs to be adjusted
+# - instructions are based on the original experiment with feedback from the author of the original study
+# - for the purpose of the multisite replication, it is important that we all use the same script (-setup-specific adjustments) and the same instructions (as provided in the script below) => please disucss any neccessary changes with us to ensure consistency across sites
+# - if you have any questions, ideas or need help with the script, please contact Jakob Kaiser (jkbkaiser@googlemail.com)
+
 #function to send trigger signal to EEG system
-#NOTE: need to adjust this function to your EEG system; definitely check if the trigger is sent correctly before starting data collection
+#NOTE: you might need to adjust this function to your EEG system; definitely check if the trigger is sent correctly before starting data collection
 #contact Jakob Kaiser if you need help with this (jkbkaiser@googlemail.com)
 #NOTE: trigger in scipt is an integer value 0-255 => adjust to your EEG system
 def sendTrigger(trigger):
-    print('Trigger %i' % trigger)
     #replace this with your system-specific trigger sending function
+    if triggerEnabled:
+        parallel.setData(trigger)
+    print('Trigger %i' % trigger)
+    
 
 
-#number of screens => adjust to your setup depending on how many screens you have connected
+#should trigger be sent? => set to False for testing without EEG system; make sure to set to True before starting data collection
+triggerEnabled = True
+#which screen to use for the experiment
 screenNumber = 2
+
+
+#####################################################################################
+#initialize trigger system (if needed => adjust to your EEG system)
+#replace this with your system-specific trigger initialization function
+# Many brainvision systems use parallel ports for triggers
+#initiat parallel port
+if triggerEnabled:
+    from psychopy import parallel
+    #setting address of parallel port connected to EEG trigger system => adjust to your system
+    parallel.setPortAddress(0x3028)
+    # set trigger signal to zero
+    parallel.setData(0)
+    print('Trigger system initialized')
+#####################################################################################
+
 
 
 expInfo = {'pnum':0, 'age':0, 'gender':'n', 'practice':True}
@@ -32,9 +65,6 @@ if expInfo['pnum'] == 0 or expInfo['age'] == 0:
     print('Please specify participate ID an age.')
     core.quit()
 
-
-
-
 pnum = expInfo['pnum']
 expInfo['dateStr'] = data.getDateStr()  # add the current time
 if practice:
@@ -47,7 +77,7 @@ dataFile = open (fileName + '.csv', 'w')
 dataFile.write('pnum,age,gender,practice,phase,timerPhase,tnum,stimPos,stimType,congruent,firstResp,firstRT,postResp,postRT,frameRate,ITI,trigger,winszX,winszY\n')
 
 #defining experiment window
-mywin = visual.Window(fullscr=True, monitor="testMonitor", screen=screenNumber, units="deg", color=(-1, -1, -1), checkTiming=True)
+mywin = visual.Window(fullscr=False, monitor="testMonitor", screen=screenNumber, units="deg", color=(-1, -1, -1), checkTiming=True)
 screenX = mywin.size[0]
 screenY = mywin.size[1]
 frameDur = mywin.monitorFramePeriod
