@@ -55,18 +55,18 @@ frameDur = mywin.monitorFramePeriod
 # fixation = visual.TextBox2(win=mywin, text="*", color=(1,1,1),size=[0.1, 0.1], pos=[0,0],units="deg", alignment="center",font="Arial")
 
 # Load the picture
-fixation = visual.ImageStim(win=mywin, image="fixation.png", size=[0.5, 0.5], pos=[0,0], units="deg")
+fixation = visual.ImageStim(win=mywin, image="stimuli/fixation.png", size=[0.5, 0.5], pos=[0,0], units="deg")
 
 #symbols for cue arrows
-arrowLeft = visual.ImageStim(win=mywin, image="cueLeft.png", size=[0.5, 0.5], pos=[0,0.6], units="deg")
-arrowRight = visual.ImageStim(win=mywin, image="cueRight.png", size=[0.5, 0.5], pos=[0,0.6], units="deg")
+arrowLeft = visual.ImageStim(win=mywin, image="stimuli/cueLeft.png", size=[0.5, 0.5], pos=[0,0.6], units="deg")
+arrowRight = visual.ImageStim(win=mywin, image="stimuli/cueRight.png", size=[0.5, 0.5], pos=[0,0.6], units="deg")
 arrows = [arrowLeft,arrowRight]
 
 #symbols for action signals
-leftActLeftPos =  visual.ImageStim(win=mywin, image="stimLeft.png", size=[0.5, 0.5], pos=[-2.2, 0], units="deg")
-leftActRightPos = visual.ImageStim(win=mywin, image="stimLeft.png", size=[0.5, 0.5], pos=[2.2, 0], units="deg")
-rightActLeftPos = visual.ImageStim(win=mywin, image="stimRight.png", size=[0.5, 0.5], pos=[-2.2, 0], units="deg")
-rightActRightPos = visual.ImageStim(win=mywin, image="stimRight.png", size=[0.5, 0.5], pos=[2.2, 0], units="deg")
+leftActLeftPos =  visual.ImageStim(win=mywin, image="stimuli/stimLeft.png", size=[0.5, 0.5], pos=[-2.2, 0], units="deg")
+leftActRightPos = visual.ImageStim(win=mywin, image="stimuli/stimLeft.png", size=[0.5, 0.5], pos=[2.2, 0], units="deg")
+rightActLeftPos = visual.ImageStim(win=mywin, image="stimuli/stimRight.png", size=[0.5, 0.5], pos=[-2.2, 0], units="deg")
+rightActRightPos = visual.ImageStim(win=mywin, image="stimuli/stimRight.png", size=[0.5, 0.5], pos=[2.2, 0], units="deg")
 
 leftAct = [leftActLeftPos,leftActRightPos]
 rightAct = [rightActLeftPos,rightActRightPos]
